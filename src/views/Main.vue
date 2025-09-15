@@ -1,29 +1,45 @@
   <template>
     <section class="">
-      <!-- Navigation -->
-      <nav class="bg-white shadow h-16 flex items-center px-8">
-        <div class="flex justify-between items-center w-full">
-          <!-- Logo -->
-          <div class="flex items-center font-bold text-xl text-[#FB7D46]">
-            @School
-          </div>
-          <!-- Links -->
-          <div class="hidden md:flex gap-8">
-            <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">الدورات</a>
-            <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المميزات</a>
-            <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المجتمع</a>
-            <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المصادر</a>
-            <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">تسجيل الدخول</a>
-          </div>
-          <!-- Buttons -->
-          <div class="flex gap-4">
-            <a href="#"
-              class="px-3 py-1 rounded bg-[#FB7D46] text-white border-[2px] border-[#FB7D46] hover:bg-white hover:text-[#FB7D46] transition">
-              ابدأ مجاناً
-            </a>
-          </div>
-        </div>
-      </nav>
+ <nav class="bg-white shadow h-16 flex items-center px-8 relative">
+    <div class="flex justify-between items-center w-full">
+      <div class="flex items-center font-bold text-xl text-[#FB7D46]">
+        @School
+      </div>
+      <div class="md:hidden">
+        <button @click="toggleMenu" class="text-gray-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden md:flex gap-8">
+        <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">الدورات</a>
+        <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المميزات</a>
+        <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المجتمع</a>
+        <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">المصادر</a>
+        <a href="#" class="font-bold text-gray-700 hover:text-[#FB7D46]">تسجيل الدخول</a>
+      </div>
+      <div class="hidden md:flex gap-4">
+        <a href="#"
+          class="px-3 py-1 rounded bg-[#FB7D46] text-white border-[2px] border-[#FB7D46] hover:bg-white hover:text-[#FB7D46] transition">
+          ابدأ مجاناً
+        </a>
+      </div>
+    </div>
+    <div v-if="isMenuOpen" class="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg py-4 z-50">
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-end">الدورات</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100  text-end">المميزات</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100  text-end">المجتمع</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100  text-end">المصادر</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100  text-end">تسجيل الدخول</a>
+      <div class="mt-4 px-4">
+        <a href="#"
+          class="block text-center px-3 py-1 rounded bg-[#FB7D46] text-white border-[2px] border-[#FB7D46] hover:bg-white hover:text-[#FB7D46] transition">
+          ابدأ مجاناً
+        </a>
+      </div>
+    </div>
+  </nav>
       <section class="bg-white text-black w-full">
         <!-- Hero Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 px-8 md:px-16 py-12">
@@ -554,6 +570,10 @@
   </template>
 <script setup>
 import { ref, computed, onMounted } from "vue";
+const isMenuOpen = ref(false);
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 // Define the courses data using ref
 const courses = ref([
   {
